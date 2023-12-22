@@ -7,7 +7,7 @@ function Home() {
 
     const loadProduct = async () => {
         const response = await axios.get("/products");
-        console.log(response);
+        setProduct(response?.data?.data);
     }
 
     useEffect (() => {
@@ -17,6 +17,15 @@ function Home() {
   return (
     <div>
         <h1 className='text-center'>All Products</h1>
+        {
+          product?.map((product, index)=>{
+            return(<div className ='product-card'>
+              <h1>{product.name}</h1>)
+              <h2>{product.price}</h2>
+              <p>{product.description}</p>
+              </div>)
+          })        
+        }
     </div>
   )
 }
