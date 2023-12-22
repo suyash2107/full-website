@@ -1,13 +1,14 @@
 import ReactDOM from 'react-dom/client';
-import {createbBrowserRouter, RouterProvider} from 'react-router-dom';
-import home from "./views/Home/home"
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import Home from "./views/Home/Home.js";
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const router = createbBrowserRouter([{
+const router = createBrowserRouter([{
   "path": "/",
-  "element":<home/>
-}])
+  "element":<Home/>
+}]);
 
 root.render(<RouterProvider router={router}/> );
 
