@@ -18,25 +18,35 @@ connectMongoDB();
 
 
 app.post('/product', async (req, res) => {
-    const {name, price, description }= req.body;
+    const {name, price, description, image }= req.body;
 
-    const product = new Product({
+    const product = new product({
         name : name,
         price: price,
-        description: description
+        description: description,
+        image: image
     });
 
-    const savedProduct = await product.save();
+    try {
+        const savedProduct = await product.save();
 
     res.json({
         success: true,
         data: savedProduct,
         message: 'product added Sucessfully'
     })
+    } 
+    catch(e)
+    {
+        res.json({
+            success: false,
+            message: e.message
+        })
+    }
 });
 
 app.get('/product',async (req, res)=>{
-    const products = await Product.find();
+    const products = await products.find();
 
     res.json({
       success: true,
@@ -48,7 +58,7 @@ app.get('/product',async (req, res)=>{
 app.get('/product/:id' , async(req, res)=>{
     const {id} = req.params;
 
-    const product = await Product.findOne({_id: id});
+    const product = await product.findOne({_id: id});
 
     res.json({
         success: true,

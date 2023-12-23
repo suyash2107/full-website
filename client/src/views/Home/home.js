@@ -5,13 +5,13 @@ import axios from 'axios';
 function Home() {
     const [ product , setProduct] = useState([]);
 
-    const loadProduct = async () => {
+    const loadproduct = async () => {
         const response = await axios.get("/products");
         setProduct(response?.data?.data);
     }
 
     useEffect (() => {
-        loadProduct();
+        loadproduct();
     }, []);
 
   return (
