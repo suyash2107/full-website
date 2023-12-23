@@ -3,27 +3,24 @@ import "./Home.css"
 import axios from 'axios';
 
 function Home() {
-    const [ product , setProduct] = useState([]);
+    const [ products , setProduct] = useState([]);
 
-    const loadproduct = async () => {
+    const loadproducts = async () => {
         const response = await axios.get("/products");
         setProduct(response?.data?.data);
     }
 
     useEffect (() => {
-        loadproduct();
+        loadproducts();
     }, []);
 
   return (
     <div>
         <h1 className='text-center'>All Products</h1>
         {
-          product?.map((product, index)=>{
-            return(<div className ='product-card'>
-              <h1>{product.name}</h1>)
-              <h2>{product.price}</h2>
-              <p>{product.description}</p>
-              </div>)
+          products?.map((product, index)=>{
+            const {_id, name, price, description, image} = product;
+            return(<productcard key={index} id={_id} name={name} description={description} price={price} image={image}/>)
           })        
         }
     </div>
