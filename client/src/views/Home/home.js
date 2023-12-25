@@ -1,30 +1,37 @@
-import React, {useEffect, useState } from 'react'
-import "./Home.css"
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import "./Home.css";
+import ProductCard from './../components/ProductCard/ProductCard';
+import { checkLogin } from '../../utils/auth';
 
 function Home() {
-    const [ products , setProduct] = useState([]);
+  const [products, setProducts] = useState([]);
 
-    const loadproducts = async () => {
-        const response = await axios.get("/products");
-        setProduct(response?.data?.data);
-    }
+  const loadProducts = async () =>{
+    const response = await axios.get("/products");
+    setProducts(response?.data?.data);
+  }
 
-    useEffect (() => {
-        loadproducts();
-    }, []);
+  useEffect(()=>{
+    checkLogin();
+    loadProducts();
+  }, []);
 
   return (
     <div>
-        <h1 className='text-center'>All Products</h1>
+      <h1 className='text-center'>All Products</h1>
+
+      <div className="products-container">
         {
           products?.map((product, index)=>{
             const {_id, name, price, description, image} = product;
-            return(<productcard key={index} id={_id} name={name} description={description} price={price} image={image}/>)
-          })        
+
+            return (<ProductCard key={index} id={_id} name={name} price={price} description={description} image={image} />)
+          })
         }
+      </div>
     </div>
   )
 }
 
-export default Home ;
+export default Home
