@@ -1,5 +1,5 @@
 import React from 'react'
-import "./ProductCard.css";
+import "./Productcard.css";
 import {Link} from 'react-router-dom';
 
 function ProductCard({id, name, price, description, image}) {

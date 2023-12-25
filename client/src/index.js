@@ -1,11 +1,11 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import "./index.css";
-import Home from "./views/Home/Home";
-import Signup from "./views/Signup/Signup";
-import Login from "./views/Login/Login";
-import Buy from './views/Buy/Buy';
-import MyOrders from './views/MyOrders/MyOrders';
+import Home from "./views/Home/home.js";
+import Signup from "./views/Signup/signup.js";
+import Login from "./views/Login/login.js";
+import Buy from './views/Buy/Buy.js';
+import MyOrders from './views/MyOrders/MyOrders.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
