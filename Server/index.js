@@ -129,26 +129,37 @@ app.post("/signup", async(req, res)=>{
   }
 })
 
-app.post("/login", async(req, res)=>{
-  const {email, password} = req.body;
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
 
-  const user = await User.findOne({email: email, password: password});
+  try {
+    // Find user by email
+    const user = await User.findOne({ email: email });
 
-  if(user){
-    return res.json({
-      success: true,
-      data: user,
-      message: "User logged in successfully"
-    })
-  }
-  else
-  {
-    return res.json({
+    // Check if user exists and password matches
+    if (user && user.password === password) {
+      // If user exists and password matches, send success response
+      return res.json({
+        success: true,
+        data: user,
+        message: "User logged in successfully"
+      });
+    } else {
+      // If user does not exist or password does not match, send error response
+      return res.json({
+        success: false,
+        message: "Invalid email or password"
+      });
+    }
+  } catch (error) {
+    // If an error occurs during database operation, send error response
+    return res.status(500).json({
       success: false,
-      message: "Invalid email or password"
-    })
+      message: "An error occurred while logging in"
+    });
   }
-})
+});
+
 
 app.post("/order", async(req, res)=>{
   const {product, user, quantity, shippingAddress} = req.body;
